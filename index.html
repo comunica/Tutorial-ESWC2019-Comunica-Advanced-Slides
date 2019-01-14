@@ -41,28 +41,126 @@
       <p class="affiliation"><a href="http://idlab.technology/">Ghent University – imec – IDLab, Belgium</a></p>
     </section>
     
-    <section id="start" class="slide">
-        <h2 class="big">Some title</h2>
-        <ul>
-            <li>
-                Something else
-            </li>
-        </ul>
+    <section id="start" class="slide" style="background-image: url('img/car.jpg'); background-size: 120%">
+        <h2 class="big" style="margin-top: 0px; color: white; text-shadow: 2px 2px black">A query engine is like a car</h2>
+        <h3 class="big" style="color: white; text-shadow: 2px 2px black">They both have swappable components</h3>
+    </section>
+    
+    <section id="start-hardwiring" class="slide">
+        <h2>Hard-wiring of components</h2>
+        <p>The easiest way to add components is by manually adding instances.</p>
+        <pre>
+    const myCar = new Car();
+    
+    myCar.add(new EngineV8());
+    
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+        </pre>
+        <p class="next">Downside: swapping components requires code changes.</p>
+    </section>
+    
+    <section id="start-softwiring" class="slide">
+        <h2>Soft-wiring of components</h2>
+        <p><strong>Dependency Injection</strong>: Components are supplied by something external.</p>
+        <p>Components can be defined <strong>declaratively</strong> via a <strong>configuration file</strong>.</p>
+        <pre>
+    const myCar = CarFactory.instantiateCar('car-config-json');
+        </pre>
+    </section>
+    
+    <section id="start-componentsjs" class="slide">
+        <h2>Components.js</h2>
+        <p>A dependency injection framework for JavaScript</p>
+        <p>Components are described in a <em>semantic</em> configuration file</p>
+        <p>Comunica uses Components.js to wire actors, buses and mediators</p>
     </section>
     
     <section id="index" class="slide index">
       <ul>
-        <li><a href="#index-a">Part A</a></li>
-        <li><a href="#index-b">Part B</a></li>
-        <li><a href="#index-c">Part C</a></li>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li><a href="#index-comunica">Comunica config</a></li>
+        <li><a href="#index-references">References</a></li>
       </ul>
     </section>
     
-    <section id="index-a" class="slide index">
+    <section id="start-componentsjs" class="slide">
+        <h2>Components.js</h2>
+        <p>A dependency injection framework for JavaScript</p>
+        <p>Components are described in a <em>semantic</em> configuration file</p>
+        <p>Comunica uses Components.js to wire actors, buses and mediators</p>
+    </section>
+    
+    <section id="index-terminology" class="slide index">
       <ul>
-        <li class="current"><a href="#index-a">Part A</a></li>
-        <li><a href="#index-b">Part B</a></li>
-        <li><a href="#index-c">Part C</a></li>
+        <li class="current"><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li><a href="#index-comunica">Comunica config</a></li>
+        <li><a href="#index-references">References</a></li>
+      </ul>
+    </section>
+    
+    <section id="terminology" class="slide">
+        <h2>Terminology</h2>
+        <p style="float: left">
+            <strong>Module</strong>: <span>Collection of components <em>(e.g., a software package)</em></span>
+            <br />
+            <span style="margin-left: 0.5em; font-size: 2em">&darr;</span>
+            <br />
+            <strong>Component</strong>: <span>Something that can be instantiated <em>(e.g., a class)</em></span>
+            <br />
+            <span style="margin-left: 0.5em; font-size: 2em">&darr;</span>
+            <br />
+            <strong>Instance</strong>: <span>An instantiated Component</span><br />
+        </p>
+        <div style="float: right; width: 8em; text-align: center" class="next">
+            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Modules file</div>
+            <div style="background-color: #2295e8; margin-top: 4em">Config file</div>
+        </div>
+    </section>
+    
+    <section id="index-modules" class="slide index">
+      <ul>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li class="current"><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li><a href="#index-comunica">Comunica config</a></li>
+        <li><a href="#index-references">References</a></li>
+      </ul>
+    </section>
+    
+    <section id="index-config" class="slide index">
+      <ul>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li class="current"><a href="#index-config">Config</a></li>
+        <li><a href="#index-comunica">Comunica config</a></li>
+        <li><a href="#index-references">References</a></li>
+      </ul>
+    </section>
+    
+    <section id="index-comunica" class="slide index">
+      <ul>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li class="current"><a href="#index-comunica">Comunica config</a></li>
+        <li><a href="#index-references">References</a></li>
+      </ul>
+    </section>
+    
+    <section id="index-references" class="slide index">
+      <ul>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li><a href="#index-comunica">Comunica config</a></li>
+        <li class="current"><a href="#index-references">References</a></li>
       </ul>
     </section>
 
