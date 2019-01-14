@@ -46,6 +46,31 @@
         <h3 class="big" style="color: white; text-shadow: 2px 2px black">They both have swappable components</h3>
     </section>
     
+    <section id="start-hardwiring" class="slide">
+        <h2>Hard-wiring of components</h2>
+        <p>The easiest way to add components is by manually adding instances.</p>
+        <pre>
+    const myCar = new Car();
+    
+    myCar.add(new EngineV8());
+    
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+    myCar.add(new TireMichelin());
+        </pre>
+        <p class="next">Downside: swapping components requires code changes.</p>
+    </section>
+    
+    <section id="start-softwiring" class="slide">
+        <h2>Soft-wiring of components</h2>
+        <p><strong>Dependency Injection</strong>: Components are supplied by something external.</p>
+        <p>Components can be defined <strong>declaratively</strong> via a <strong>configuration file</strong>.</p>
+        <pre>
+    const myCar = CarFactory.instantiateCar('car-config-json');
+        </pre>
+    </section>
+    
     <section id="index" class="slide index">
       <ul>
         <li><a href="#index-a">Part A</a></li>
