@@ -83,16 +83,8 @@
         <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-comunica">Comunica config</a></li>
         <li><a href="#index-references">References</a></li>
       </ul>
-    </section>
-    
-    <section id="start-componentsjs" class="slide">
-        <h2>Components.js</h2>
-        <p>A dependency injection framework for JavaScript</p>
-        <p>Components are described in a <em>semantic</em> configuration file</p>
-        <p>Comunica uses Components.js to wire actors, buses and mediators</p>
     </section>
     
     <section id="index-terminology" class="slide index">
@@ -100,7 +92,6 @@
         <li class="current"><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-comunica">Comunica config</a></li>
         <li><a href="#index-references">References</a></li>
       </ul>
     </section>
@@ -119,7 +110,7 @@
             <strong>Instance</strong>: <span>An instantiated Component</span><br />
         </p>
         <div style="float: right; width: 8em; text-align: center" class="next">
-            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Modules file</div>
+            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Module file</div>
             <div style="background-color: #2295e8; margin-top: 4em">Config file</div>
         </div>
     </section>
@@ -129,9 +120,82 @@
         <li><a href="#index-terminology">Terminology</a></li>
         <li class="current"><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-comunica">Comunica config</a></li>
         <li><a href="#index-references">References</a></li>
       </ul>
+    </section>
+    
+    <section id="modules-overview" class="slide">
+        <h2>A Module file describes a Module<br />and its Components</h2>
+        <div style="float:left;width:18em">
+            <strong>Module</strong>:
+            <ul>
+                <li>ID: <em>IRI that uniquely identifies this module</em></li>
+                <li>Name: <em>Label for this module</em></li>
+                <li>Components: <em>Parts of this module</em></li>
+                <li>&hellip;</li>
+            </ul>
+        </div>
+        <div style="float:right;width:18em">
+            <strong>Component</strong>:
+            <ul>
+                <li>ID: <em>IRI that uniquely identifies this component</em></li>
+                <li>Parameters: <em>For instantiation</em></li>
+                <li>&hellip;</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="modules-example-overview" class="slide">
+        <h2>Comunica offers modules<br />for different query operators</h2>
+        <p>Each module is published as a separate NPM package.</p>
+        <ul>
+            <li><code>@comunica/actor-query-operation-distinct-hash</code>:<br /> &nbsp;<code>ActorQueryOperationDistinctHash</code></li>
+            <li><code>@comunica/actor-query-operation-union</code>:<br /> &nbsp;<code>ActorQueryOperationUnion</code></li>
+            <li><code>@comunica/actor-query-operation-construct</code>:<br /> &nbsp;<code>ActorQueryOperationConstruct</code></li>
+            <li><code>@comunica/actor-query-operation-join</code>:<br /> &nbsp;<code>ActorQueryOperationJoin</code></li>
+            <li>&hellip;</li>
+        </ul>
+    </section>
+    
+    <section id="modules-example-json" class="slide">
+        <h2>Each module is described in JSON-LD</h2>
+        <p>We use <code>import</code> statements to refer to components.</p>
+        <pre>
+{
+  "@context": …,
+  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "@type": "Module",
+  "requireName": "@comunica/actor-query-operation-distinct-hash",
+  "import": [
+    "files:components/Actor/QueryOperation/DistinctHash.jsonld"
+  ]
+}
+        </pre>
+    </section>
+    
+    <section id="modules-example-json" class="slide">
+        <h2>Components are described in JSON-LD</h2>
+            <pre>
+{
+  "@context": …,
+  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "components": [
+    {
+      "@id": "caqodh:Actor/QueryOperation/DistinctHash",
+      "requireElement": "ActorQueryOperationDistinctHash",
+      "parameters": [
+        {
+          "@id":     "caqodh:hashAlgorithm",
+          "default": "sha1"
+        },
+        {
+          "@id":     "caqodh:digestAlgorithm",
+          "default": "base64"
+        }
+    }
+  ]
+}
+        </pre>
     </section>
     
     <section id="index-config" class="slide index">
@@ -139,19 +203,42 @@
         <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li class="current"><a href="#index-config">Config</a></li>
-        <li><a href="#index-comunica">Comunica config</a></li>
         <li><a href="#index-references">References</a></li>
       </ul>
     </section>
     
-    <section id="index-comunica" class="slide index">
-      <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
-        <li><a href="#index-modules">Modules</a></li>
-        <li><a href="#index-config">Config</a></li>
-        <li class="current"><a href="#index-comunica">Comunica config</a></li>
-        <li><a href="#index-references">References</a></li>
-      </ul>
+    <section id="config-overview" class="slide">
+        <h2>A Config file <em>instantiates</em> components</h2>
+        <ul>
+            <li>Each instance has a unique ID (URI)</li>
+            <li>The <code>@type</code> of an instance is a Component (URI)</li>
+            <li>Component parameters can be defined on the instance</li>
+            <li>Parameter values can link to other instances &rarr; <strong>wiring</strong></li>
+        </ul>
+    </section>
+    
+    <section id="config-example-json" class="slide">
+        <h2>Comunica describes instances in JSON-LD</h2>
+            <pre>
+{
+  "@context": …,
+  "@id": "urn:comunica:my",
+  "actors": [
+    {
+      "@id":                    "#myDistinctQueryOperator",
+      "@type":                  "ActorQueryOperationDistinctHash",
+      "mediatorQueryOperation": "#mediatorQueryOperation",
+      "caqodh:hashAlgorithm":   "RSA-SHA256"
+    },
+    {
+      "@id":                    "#myConstructQueryOperator",
+      "@type":                  "ActorQueryOperationConstruct",
+      "mediatorQueryOperation": "#mediatorQueryOperation"
+    },
+    …
+  ]
+}
+        </pre>
     </section>
     
     <section id="index-references" class="slide index">
@@ -159,9 +246,18 @@
         <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-comunica">Comunica config</a></li>
         <li class="current"><a href="#index-references">References</a></li>
       </ul>
+    </section>
+    
+    <section id="references" class="slide">
+        <h2>Useful links</h2>
+        <ul>
+            <li>These slides: <a href="https://comunica.github.io/Tutorial-ESWC2019-Comunica-Advanced-Slides/" style="font-size: 0.6em">https://comunica.github.io/Tutorial-ESWC2019-Comunica-Advanced-Slides/</a></li>
+            <li>Source code: <a href="https://github.com/LinkedSoftwareDependencies/Components.js" style="font-size: 0.6em">https://github.com/LinkedSoftwareDependencies/Components.js</a></li>
+            <li>Documentation: <a href="https://componentsjs.readthedocs.io/" style="font-size: 0.6em">https://componentsjs.readthedocs.io/</a></li>
+            <li>Comunica configs: <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config" style="font-size: 0.6em">https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config</a></li>
+        </ul>
     </section>
 
     <footer>
