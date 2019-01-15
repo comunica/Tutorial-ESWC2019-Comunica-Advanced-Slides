@@ -119,7 +119,7 @@
             <strong>Instance</strong>: <span>An instantiated Component</span><br />
         </p>
         <div style="float: right; width: 8em; text-align: center" class="next">
-            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Modules file</div>
+            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Module file</div>
             <div style="background-color: #2295e8; margin-top: 4em">Config file</div>
         </div>
     </section>
@@ -133,6 +133,80 @@
         <li><a href="#index-references">References</a></li>
       </ul>
     </section>
+    
+    <section id="modules-overview" class="slide">
+        <h2>A Module file describes a Module<br />and its Components</h2>
+        <div style="float:left;width:18em">
+            <strong>Module</strong>:
+            <ul>
+                <li>ID: <em>IRI that uniquely identifies this module</em></li>
+                <li>Name: <em>Label for this module</em></li>
+                <li>Components: <em>Parts of this module</em></li>
+                <li>&hellip;</li>
+            </ul>
+        </div>
+        <div style="float:right;width:18em">
+            <strong>Component</strong>:
+            <ul>
+                <li>ID: <em>IRI that uniquely identifies this component</em></li>
+                <li>Parameters: <em>For instantiation</em></li>
+                <li>&hellip;</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="modules-example-overview" class="slide">
+        <h2>Comunica offers modules<br />for different query operators</h2>
+        <p>Each module is published as a separate NPM package.</p>
+        <ul>
+            <li><code>@comunica/actor-query-operation-distinct-hash</code>:<br /> &nbsp;<code>ActorQueryOperationDistinctHash</code></li>
+            <li><code>@comunica/actor-query-operation-union</code>:<br /> &nbsp;<code>ActorQueryOperationUnion</code></li>
+            <li><code>@comunica/actor-query-operation-construct</code>:<br /> &nbsp;<code>ActorQueryOperationConstruct</code></li>
+            <li><code>@comunica/actor-query-operation-join</code>:<br /> &nbsp;<code>ActorQueryOperationJoin</code></li>
+            <li>&hellip;</li>
+        </ul>
+    </section>
+    
+    <section id="modules-example-json" class="slide">
+        <h2>Each module is described in JSON-LD</h2>
+        <p>We use <code>import</code> statements to refer to components.</p>
+        <pre>
+{
+  "@context": …,
+  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "@type": "Module",
+  "requireName": "@comunica/actor-query-operation-distinct-hash",
+  "import": [
+    "files:components/Actor/QueryOperation/DistinctHash.jsonld"
+  ]
+}
+        </pre>
+    </section>
+    
+        <section id="modules-example-json" class="slide">
+            <h2>Components are described in JSON-LD</h2>
+            <pre>
+{
+  "@context": …,
+  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "components": [
+    {
+      "@id": "caqodh:Actor/QueryOperation/DistinctHash",
+      "requireElement": "ActorQueryOperationDistinctHash",
+      "parameters": [
+        {
+          "@id": "caqodh:hashAlgorithm",
+          "default": "sha1"
+        },
+        {
+          "@id": "caqodh:digestAlgorithm",
+          "default": "base64"
+        }
+    }
+  ]
+}
+            </pre>
+        </section>
     
     <section id="index-config" class="slide index">
       <ul>
