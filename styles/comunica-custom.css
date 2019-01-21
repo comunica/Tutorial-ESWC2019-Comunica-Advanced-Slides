@@ -227,6 +227,10 @@ li.inactive {
     visibility: hidden;
 }
 
+.muted {
+    color: gray;
+}
+
 iframe {
     border: none;
     width: 100%;
