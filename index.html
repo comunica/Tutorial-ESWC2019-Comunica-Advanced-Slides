@@ -84,6 +84,7 @@
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
+        <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
@@ -93,6 +94,7 @@
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
+        <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
@@ -121,6 +123,7 @@
         <li class="current"><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
+        <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
@@ -226,6 +229,7 @@
         <li><a href="#index-modules">Modules</a></li>
         <li class="current"><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
+        <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
@@ -269,6 +273,7 @@
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li class="current"><a href="#index-references">References</a></li>
+        <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
@@ -280,6 +285,77 @@
             <li>Documentation: <a href="https://componentsjs.readthedocs.io/" style="font-size: 0.6em">https://componentsjs.readthedocs.io/</a></li>
             <li>Comunica configs: <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config" style="font-size: 0.6em">https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config</a></li>
         </ul>
+    </section>
+    
+    <section id="index-handson" class="slide index">
+      <ul>
+        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-modules">Modules</a></li>
+        <li><a href="#index-config">Config</a></li>
+        <li><a href="#index-references">References</a></li>
+        <li class="current"><a href="#index-handson">Hands-on</a></li>
+      </ul>
+    </section>
+    
+    <section id="custom-actor" class="slide">
+        <h2>Hands-on: wiring a Comunica actor</h2>
+        <p><strong>Goal:</strong> Implementing, configuring, and using a custom <code>REDUCED</code> actor.</p>
+        <p><code>REDUCED</code>: A best-effort variant of SPARQL's <code>DISTINCT</code>.</p>
+        <p>
+            Example:
+            <div style="text-align: center; vertical-align: middle">
+            <pre style="display: inline-block">
+?var: 'B'
+?var: 'A'
+?var: 'A'
+?var: 'B'
+?var: 'B'
+            </pre>
+            <div style="display: inline-block; padding-bottom: 2em">&rarr;<code>REDUCED</code>&rarr;</div>
+            <pre style="display: inline-block">
+?var: 'B'
+?var: 'A'
+?var: 'B'
+            </pre>
+            </div>
+        </p>
+    </section>
+    
+    <section id="custom-actor-requirements" class="slide">
+        <h2>Hands-on: requirements</h2>
+        <ul>
+            <li><a href="https://git-scm.com/">git</a>: <span class="muted">cloning the starting code, and skipping steps</span></li>
+            <li><a href="https://nodejs.org/en/">Node.js</a> <em>(version 8.0 or higher)</em>: <span class="muted">running the code</span></li>
+            <li>A JavaScript editor. <em>(we will use <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>)</em>: <span class="muted">editing the code</span></li>
+        </ul>
+    </section>
+    
+    <section id="custom-actor-steps" class="slide">
+        <h2>Hands-on: five steps</h2>
+        <ol>
+            <li>Initialization of a Comunica engine: <span class="muted">We provide an NPM package to start from.</span></li>
+            <li>Creation of a new actor: <span class="muted">JavaScript, module, and component files.</span></li>
+            <li>Actor configuration: <span class="muted">Plugging in the actor via the config file.</span></li>
+            <li>Logging configuration: <span class="muted">Adding an existing logger to the config file.</span></li>
+            <li><code>REDUCED</code> implementation: <span class="muted">Actual JavaScript implementation.</span></li>
+        </ol>
+        <p class="next">
+            Each step can be skipped by checking out a different git <code>tag</code>.
+            <br />
+            <em class="indent">For example, show the solution of step 2: <code>git checkout tutorial-step/2</code></em>
+        </p>
+    </section>
+    
+    <section id="custom-actor-links" class="slide">
+        <h2>Hands-on: getting started</h2>
+        <pre style="font-size: 0.9em">
+$ git clone https://github.com/comunica/Tutorial-Comunica-Reduced-Actor
+$ git checkout tutorial-step/1
+        </pre>
+        <p>Each step is explained in detail on GitHub wiki:</p>
+        <p class="center">
+            <strong><a href="https://github.com/comunica/Tutorial-Comunica-Reduced-Actor">https://github.com/comunica/Tutorial-Comunica-Reduced-Actor</a></strong>
+        </p>
     </section>
 
     <footer>
