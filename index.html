@@ -69,18 +69,30 @@
         <pre>
     const myCar = CarFactory.instantiateCar('car-config-json');
         </pre>
+        <p>car-config.json:</p>
+        <pre>
+[
+    "EngineV8",
+    "TireMichelin",
+    "TireMichelin",
+    "TireMichelin",
+    "TireMichelin"
+]
+        </pre>
     </section>
     
     <section id="start-componentsjs" class="slide">
-        <h2>Components.js</h2>
-        <p>A dependency injection framework for JavaScript</p>
+        <h2>Comunica heavily makes use of dependency injection</h2>
+        <p>Components.js: A dependency injection framework for JavaScript</p>
         <p>Components are described in a <em>semantic</em> configuration file</p>
+        <p class="indent">&rarr; A semantic layer on top of your source code</p>
+        <p class="indent">&rarr; Configuration files could also be used for other programming languages</p>
         <p>Comunica uses Components.js to wire actors, buses and mediators</p>
     </section>
     
     <section id="index" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-terminology">Components.js Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
@@ -90,7 +102,7 @@
     
     <section id="index-terminology" class="slide index">
       <ul>
-        <li class="current"><a href="#index-terminology">Terminology</a></li>
+        <li class="current"><a href="#index-terminology">Components.js Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
@@ -99,7 +111,7 @@
     </section>
     
     <section id="terminology" class="slide">
-        <h2>Terminology</h2>
+        <h2>Components.js Terminology</h2>
         <p style="float: left">
             <strong>Module</strong>: <span>Collection of components <em>(e.g., a software package)</em></span>
             <br />
@@ -112,14 +124,14 @@
             <strong>Instance</strong>: <span>An instantiated Component</span><br />
         </p>
         <div style="float: right; width: 8em; text-align: center" class="next">
-            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Module file</div>
+            <div style="background-color: #30c611; height: 5em; padding-top: 3em">Module file<br /><span style="font-size: 0.8em">(in software package)</span></div>
             <div style="background-color: #2295e8; margin-top: 4em">Config file</div>
         </div>
     </section>
     
     <section id="index-modules" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-terminology">Components.js Terminology</a></li>
         <li class="current"><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
@@ -162,7 +174,7 @@
     
     <section id="modules-example-json" class="slide">
         <h2>Each module is described in JSON-LD</h2>
-        <p>We use <code>import</code> statements to refer to components.</p>
+        <p>We use <code>import</code> statements to refer to components in different files.</p>
         <pre>
 {
   "@context": …,
@@ -170,7 +182,8 @@
   "@type": "Module",
   "requireName": "@comunica/actor-query-operation-distinct-hash",
   "import": [
-    "files:components/Actor/QueryOperation/DistinctHash.jsonld"
+    "files:components/Actor/QueryOperation/DistinctHash.jsonld",
+    …
   ]
 }
         </pre>
@@ -180,8 +193,7 @@
         <h2>Components are described in JSON-LD</h2>
             <pre>
 {
-  "@context": …,
-  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  …
   "components": [
     {
       "@id": "caqodh:Actor/QueryOperation/DistinctHash",
@@ -225,7 +237,7 @@
     
     <section id="index-config" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-terminology">Components.js Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li class="current"><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
@@ -236,8 +248,8 @@
     <section id="config-overview" class="slide">
         <h2>A Config file <em>instantiates</em> components</h2>
         <ul>
-            <li>Each instance has a unique ID (URI)</li>
-            <li>The <code>@type</code> of an instance is a Component (URI)</li>
+            <li>Each instance has an ID (IRI)</li>
+            <li>The <code>@type</code> of an instance is a Component (IRI)</li>
             <li>Component parameters can be defined on the instance</li>
             <li>Parameter values can link to other instances &rarr; <strong>wiring</strong></li>
         </ul>
@@ -269,7 +281,7 @@
     
     <section id="index-references" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-terminology">Components.js Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li class="current"><a href="#index-references">References</a></li>
@@ -289,7 +301,7 @@
     
     <section id="index-handson" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Terminology</a></li>
+        <li><a href="#index-terminology">Components.js Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
         <li><a href="#index-references">References</a></li>
@@ -298,7 +310,7 @@
     </section>
     
     <section id="custom-actor" class="slide">
-        <h2>Hands-on: wiring a Comunica actor</h2>
+        <h2>Hands-on: creating a Comunica actor</h2>
         <p><strong>Goal:</strong> Implementing, configuring, and using a custom <code>REDUCED</code> actor.</p>
         <p><code>REDUCED</code>: A best-effort variant of SPARQL's <code>DISTINCT</code>.</p>
         <p>
@@ -334,7 +346,7 @@
         <h2>Hands-on: five steps</h2>
         <ol>
             <li>Initialization of a Comunica engine: <span class="muted">We provide an NPM package to start from.</span></li>
-            <li>Creation of a new actor: <span class="muted">JavaScript, module, and component files.</span></li>
+            <li>Creation of a new actor: <span class="muted">JavaScript stub and module files.</span></li>
             <li>Actor configuration: <span class="muted">Plugging in the actor via the config file.</span></li>
             <li>Logging configuration: <span class="muted">Adding an existing logger to the config file.</span></li>
             <li><code>REDUCED</code> implementation: <span class="muted">Actual JavaScript implementation.</span></li>
