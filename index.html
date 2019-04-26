@@ -39,6 +39,7 @@
           <li class="current">Joachim Van Herwegen</li>
       </ul>
       <p class="affiliation"><a href="http://idlab.technology/">Ghent University – imec – IDLab, Belgium</a></p>
+      <h3>Tutorial Website: http://bit.ly/eswcquery</h3>
     </section>
     
     <section id="start" class="slide" style="background-image: url('img/car.jpg'); background-size: 120%">
@@ -66,8 +67,9 @@
         <h2>Soft-wiring of components</h2>
         <p><strong>Dependency Injection</strong>: Components are supplied by something external.</p>
         <p>Components can be defined <strong>declaratively</strong> via a <strong>configuration file</strong>.</p>
+        <div class="next">
         <pre>
-    const myCar = CarFactory.instantiateCar('car-config-json');
+    const myCar = CarFactory.instantiateCar('car-config.json');
         </pre>
         <p>car-config.json:</p>
         <pre>
@@ -79,6 +81,7 @@
     "TireMichelin"
 ]
         </pre>
+        </div>
     </section>
     
     <section id="start-componentsjs" class="slide">
@@ -92,20 +95,18 @@
     
     <section id="index" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Components.js Terminology</a></li>
+        <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-references">References</a></li>
         <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
     
     <section id="index-terminology" class="slide index">
       <ul>
-        <li class="current"><a href="#index-terminology">Components.js Terminology</a></li>
+        <li class="current"><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-references">References</a></li>
         <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
@@ -131,10 +132,9 @@
     
     <section id="index-modules" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Components.js Terminology</a></li>
+        <li><a href="#index-terminology">Terminology</a></li>
         <li class="current"><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-references">References</a></li>
         <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
@@ -164,10 +164,8 @@
         <h2>Comunica offers modules<br />for different query operators</h2>
         <p>Each module is published as a separate NPM package.</p>
         <ul>
-            <li><code>@comunica/actor-query-operation-distinct-hash</code>:<br /> &nbsp;<code>ActorQueryOperationDistinctHash</code></li>
-            <li><code>@comunica/actor-query-operation-union</code>:<br /> &nbsp;<code>ActorQueryOperationUnion</code></li>
-            <li><code>@comunica/actor-query-operation-construct</code>:<br /> &nbsp;<code>ActorQueryOperationConstruct</code></li>
-            <li><code>@comunica/actor-query-operation-join</code>:<br /> &nbsp;<code>ActorQueryOperationJoin</code></li>
+            <li><strong>Module</strong>: <code>@comunica/actor-query-operation-distinct-hash</code>:<br /> &nbsp;<strong>Component</strong>: <code>ActorQueryOperationDistinctHash</code></li>
+            <li><strong>Module</strong>: <code>@comunica/actor-query-operation-construct</code>:<br /> &nbsp;<strong>Component</strong>: <code>ActorQueryOperationConstruct</code></li>
             <li>&hellip;</li>
         </ul>
     </section>
@@ -196,15 +194,15 @@
   …
   "components": [
     {
-      "@id": "caqodh:Actor/QueryOperation/DistinctHash",
+      "@id": "Actor/QueryOperation/DistinctHash",
       "requireElement": "ActorQueryOperationDistinctHash",
       "parameters": [
         {
-          "@id":     "caqodh:hashAlgorithm",
+          "@id":     "hashAlgorithm",
           "default": "sha1"
         },
         {
-          "@id":     "caqodh:digestAlgorithm",
+          "@id":     "digestAlgorithm",
           "default": "base64"
         }
     }
@@ -215,6 +213,7 @@
     
     <section id="why-semantic" class="slide">
         <h2>Why JSON-LD?</h2>
+        <p>Components.js supports any kind of RDF serialization: <em>Turtle, N-Triples, ...</em></p>
         <p>For developers that are familiar with JSON</p>
         <p>
             To achieve <em>semantic</em> RDF-based configurations:
@@ -224,7 +223,6 @@
                 <li>Any RDF-enabled application can work with these config files</li>
             </ul>
         </p>
-        <p>Components.js supports any kind of RDF serialization: <em>Turtle, N-Triples, ...</em></p>
     </section>
     
     <section id="dereferencing" class="slide">
@@ -237,10 +235,9 @@
     
     <section id="index-config" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Components.js Terminology</a></li>
+        <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li class="current"><a href="#index-config">Config</a></li>
-        <li><a href="#index-references">References</a></li>
         <li><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
@@ -265,13 +262,11 @@
     {
       "@id":                    "#myDistinctQueryOperator",
       "@type":                  "ActorQueryOperationDistinctHash",
-      "mediatorQueryOperation": "#mediatorQueryOperation",
-      "caqodh:hashAlgorithm":   "RSA-SHA256"
+      "hashAlgorithm":          "RSA-SHA256"
     },
     {
       "@id":                    "#myConstructQueryOperator",
-      "@type":                  "ActorQueryOperationConstruct",
-      "mediatorQueryOperation": "#mediatorQueryOperation"
+      "@type":                  "ActorQueryOperationConstruct"
     },
     …
   ]
@@ -279,32 +274,11 @@
         </pre>
     </section>
     
-    <section id="index-references" class="slide index">
-      <ul>
-        <li><a href="#index-terminology">Components.js Terminology</a></li>
-        <li><a href="#index-modules">Modules</a></li>
-        <li><a href="#index-config">Config</a></li>
-        <li class="current"><a href="#index-references">References</a></li>
-        <li><a href="#index-handson">Hands-on</a></li>
-      </ul>
-    </section>
-    
-    <section id="references" class="slide">
-        <h2>Useful links</h2>
-        <ul>
-            <li>These slides: <a href="https://comunica.github.io/Tutorial-ESWC2019-Comunica-Advanced-Slides/" style="font-size: 0.6em">https://comunica.github.io/Tutorial-ESWC2019-Comunica-Advanced-Slides/</a></li>
-            <li>Source code: <a href="https://github.com/LinkedSoftwareDependencies/Components.js" style="font-size: 0.6em">https://github.com/LinkedSoftwareDependencies/Components.js</a></li>
-            <li>Documentation: <a href="https://componentsjs.readthedocs.io/" style="font-size: 0.6em">https://componentsjs.readthedocs.io/</a></li>
-            <li>Comunica configs: <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config" style="font-size: 0.6em">https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql/config</a></li>
-        </ul>
-    </section>
-    
     <section id="index-handson" class="slide index">
       <ul>
-        <li><a href="#index-terminology">Components.js Terminology</a></li>
+        <li><a href="#index-terminology">Terminology</a></li>
         <li><a href="#index-modules">Modules</a></li>
         <li><a href="#index-config">Config</a></li>
-        <li><a href="#index-references">References</a></li>
         <li class="current"><a href="#index-handson">Hands-on</a></li>
       </ul>
     </section>
@@ -312,6 +286,7 @@
     <section id="custom-actor" class="slide">
         <h2>Hands-on: creating a Comunica actor</h2>
         <p><strong>Goal:</strong> Implementing, configuring, and using a custom <code>REDUCED</code> actor.</p>
+        <div class="next">
         <p><code>REDUCED</code>: A best-effort variant of SPARQL's <code>DISTINCT</code>.</p>
         <p>
             Example:
@@ -331,6 +306,7 @@
             </pre>
             </div>
         </p>
+        </div>
     </section>
     
     <section id="custom-actor-requirements" class="slide">
@@ -368,6 +344,7 @@ $ git checkout tutorial-step/1
         <p class="center">
             <strong><a href="https://github.com/comunica/Tutorial-Comunica-Reduced-Actor">https://github.com/comunica/Tutorial-Comunica-Reduced-Actor</a></strong>
         </p>
+        <h3>Tutorial Website: http://bit.ly/eswcquery</h3>
     </section>
 
     <footer>
